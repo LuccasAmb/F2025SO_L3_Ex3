@@ -20,7 +20,17 @@ public class DistroController {
 		
 		if(os.contains("Linux")) {
 			String[] dist = readProcess(callProcess("cat /etc/os-release")).split("\\R");
-			System.out.println("Nome do SO: " + dist [0] + "; Versão: " + dist[1]);
+			String name = "";
+			String version = "";
+			for(String linha: dist) {
+				if(linha.startsWith("NAME=")){
+					name = linha.split("\"")[1];
+				}
+				if(linha.startsWith("VERSION=")){
+					version = linha.split("\"")[1];
+				}
+			}
+			System.out.println("Nome do SO: " + name + "; Versão: " + version);
 			
 		}else {
 			System.out.println("SO não é o Linux.");
